@@ -17,13 +17,13 @@ const UsememoApi = () => {
  const resultProduct=useMemo(() => {
   console.log("USEMEMO")
     let result = product.filter((item) => {
-    //   console.log(product)
+    
       
       if (item.category.includes(input.toLowerCase())) {
         return item;
       }
     });
-    // console.log("state useeffect");
+   
     return result
   }, [input,product]);
 
