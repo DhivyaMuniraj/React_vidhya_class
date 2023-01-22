@@ -2,24 +2,25 @@ import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4, v4 } from "uuid";
 const App = () => {
-  //STATE FOR INPUT VALUE IN TO-DO
-  const [todo_input_value, set_To_Do_Input] = useState("");
-  const [todo_output_list, set_To_Do_Output] = useState([]);
+  
+  //STATE
+  const [input_value, set_input_value] = useState("");
+  const [output_value, set_output_value] = useState([]);
   const [edit_item_id, set_edit_item_id] = useState(null);
   const [new_todo_value, set_new_todo] = useState("");
 
-  //ADD TASK TO LIST
- const renderTask = () => {
-    if (!todo_input_value) {
+  //ADD TASK 
+  const renderTask = () => {
+    if (!input_value) {
       return alert("Enter a task");
     }
-   set_To_Do_Output((last_To_Do_Output) => [
+    set_output_value((last_To_Do_Output) => [
       ...last_To_Do_Output,
 
-      { title: todo_input_value, id: v4() },
+      { title: input_value, id: v4() },
     ]);
 
-    set_To_Do_Input("");
+    set_input_value("");
   };
 
   //DELETE TASK
@@ -37,7 +38,7 @@ const App = () => {
   };
 
   const updateToDo = () => {
-    set_To_Do_Output((prevState) => {
+    set_output_value((prevState) => {
       return prevState.map((items, index) => {
         if (items.id == edit_item_id) {
           items.title = new_todo_value;
@@ -58,14 +59,14 @@ const App = () => {
 
       <input
         placeholder="Enter a task"
-        value={todo_input_value}
-        onChange={(e) => set_To_Do_Input(e.target.value)}></input>
+        value={input_value}
+        onChange={(e) => set_input_value(e.target.value)}></input>
 
       <button onClick={renderTask}>Add</button>
 
       <h3> The tasks are</h3>
 
-      {todo_output_list.map((item, index) => {
+      {output_value.map((item, index) => {
         if (item.id === edit_item_id) {
           return (
             <div>
